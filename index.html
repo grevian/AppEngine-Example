@@ -20,10 +20,10 @@
  <ul id="main-content">
  {% for post in posts %}
   <li class="article-link">
-   <span class="rating">{% post.rating %}</span>
-   <a href="/vote/{% post.id %}?type=down" class="upvote-link">&#x25B2;</a>
-   <a href="/vote/{% post.id %}?type=down" class="downvote-link">&#x25C2;</a>
-   <a href="/article/{% post.id %}" class="article-link">{% post.title %}</a>
+   <span class="rating">{{ post.rating }}</span>
+   <a href="/vote/{{ post.id }}?type=down" class="upvote-link">&#x25B2;</a>
+   <a href="/vote/{{ post.id }}?type=down" class="downvote-link">&#x25C2;</a>
+   <a href="/article/{{ post.id }}" class="article-link">{{ post.title }}</a>
   </li>
  {% endfor %}
  </ul>
