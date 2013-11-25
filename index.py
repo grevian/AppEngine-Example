@@ -27,7 +27,7 @@ class Submit(webapp2.RequestHandler):
     self.response.out.write(template.render(template_values))
 
   def post(self):
-    article = Article(title=self.request.POST['title'], content=self.request.POST['content'])
+    article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
     article.put()
     self.redirect_to('ArticleView', article_id=article.id)
 
