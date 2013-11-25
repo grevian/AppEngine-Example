@@ -1,7 +1,32 @@
 #logo {
   display: block;
-  float: left;
-  padding-left: 3em;
+  margin-left: 3em
+  padding: 0.5em;
   border: 1px solid black;
 }
 
+label {
+  font-size: small;
+  clear: both;
+  float: left;
+  display: block;
+}
+
+input[type="text"] {
+  float: left;
+  display: block;
+  margin-left: 1em;
+}
+
+textarea {
+  float: left;
+  display: block;
+  margin-left: 1em;
+}
+
+input[type="submit"] {
+  display: block;
+  clear: both;
+  padding: 0.5em;
+}
+ 
