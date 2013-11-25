@@ -29,9 +29,9 @@ class Submit(webapp2.RequestHandler):
   def post(self):
     article = Article(title=self.request.POST['title'], content=self.request.POST['content'])
     article.put()
-    self.redirect_to('Article', article_id=article.id)
+    self.redirect_to('ArticleView', article_id=article.id)
 
-class Article(webapp2.RequestHandler):
+class ArticleView(webapp2.RequestHandler):
 
   def get(self):
     """Generate a page for a specific article"""
@@ -52,6 +52,6 @@ class Article(webapp2.RequestHandler):
 APP = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/submit', Submit),
-    ('/article/.*', Article),
+    ('/article/.*', ArticleView),
 ], debug=True)
 
