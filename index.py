@@ -28,6 +28,7 @@ class Article(webapp2.RequestHandler):
     post = Posts.get_by_id(id)
     template_values = {
       'title': post.title,
+      'content': post.content,
       'date': post.date,
       'rating': post.rating,
       'id': post.id,
