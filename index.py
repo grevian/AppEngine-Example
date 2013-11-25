@@ -40,9 +40,9 @@ class ArticleView(webapp2.RequestHandler):
     template_values = {
       'title': article.title,
       'content': article.content,
-      'date': article.date,
+      'date': article.submitted,
       'rating': article.rating,
-      'id': article.id,
+      'id': article_id,
     }
 
     template = jinja_environment.get_template('article.html')
