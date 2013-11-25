@@ -20,6 +20,17 @@ class MainPage(webapp2.RequestHandler):
     template = jinja_environment.get_template('index.html')
     self.response.out.write(template.render(template_values))
 
+class Submit(webapp2.RequestHandler):
+
+  def get(self):
+    template = jinja_environment.get_template('submit.html')
+    self.response.out.write(template.render(template_values))
+
+  def post(self):
+    article = Article(title=self.request.POST['title'], content=self.request.POST['content'])
+    article.put()
+    self.redirect_to('Article', article_id=article.id)
+
 class Article(webapp2.RequestHandler):
 
   def get(self):
@@ -40,6 +51,7 @@ class Article(webapp2.RequestHandler):
 # Here we can set up more advanced routing rules
 APP = webapp2.WSGIApplication([
     ('/', MainPage),
+    ('/submit', Submit),
     ('/article/.*', Article),
 ], debug=True)
 
