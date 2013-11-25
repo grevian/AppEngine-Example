@@ -52,6 +52,6 @@ class ArticleView(webapp2.RequestHandler):
 APP = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/submit', Submit),
-    ('/article/<article_id:.*>', ArticleView),
+    ('/article/<article_id:\d+>', ArticleView),
 ], debug=True)
 
