@@ -36,7 +36,7 @@ class ArticleView(webapp2.RequestHandler):
 
   def get(self, article_id):
     """Generate a page for a specific article"""
-    article = Article.get_by_id(article_id)
+    article = Article.get_by_id(int(article_id))
     template_values = {
       'title': article.title,
       'content': article.content,
