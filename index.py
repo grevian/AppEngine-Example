@@ -1,6 +1,7 @@
-import webapp2
 import jinja2
+import logging
 import os
+import webapp2
 
 from models import Article
 
@@ -33,10 +34,9 @@ class Submit(webapp2.RequestHandler):
 
 class ArticleView(webapp2.RequestHandler):
 
-  def get(self):
+  def get(self, article_id):
     """Generate a page for a specific article"""
-    id = self.request.GET['article_id']
-    article = Article.get_by_id(int(id))
+    article = Article.get_by_id(article_id)
     template_values = {
       'title': article.title,
       'content': article.content,
