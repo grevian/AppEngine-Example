@@ -50,8 +50,8 @@ class ArticleView(webapp2.RequestHandler):
 
 # Here we can set up more advanced routing rules
 APP = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/submit', Submit),
-    ('/article/<article_id:.*>', ArticleView),
+    (r'/', MainPage),
+    (r'/submit', Submit),
+    (r'/article/(\d+)', ArticleView),
 ], debug=True)
 
