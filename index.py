@@ -28,8 +28,8 @@ class Submit(webapp2.RequestHandler):
 
   def post(self):
     article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
-    article.put()
-    self.redirect_to('ArticleView', article_id=article.id)
+    article_key = article.put()
+    self.redirect_to('ArticleView', article_id=article_key.id())
 
 class ArticleView(webapp2.RequestHandler):
 
