@@ -29,7 +29,7 @@ class Submit(webapp2.RequestHandler):
   def post(self):
     article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
     article_key = article.put()
-    self.redirect_to('ArticleView', article_id=article_key.id())
+    return self.redirect('/article/%d' % article_key.id(), body="Thanks for your submission!")
 
 class ArticleView(webapp2.RequestHandler):
 
@@ -52,6 +52,6 @@ class ArticleView(webapp2.RequestHandler):
 APP = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/submit', Submit),
-    ('/article/.*', ArticleView),
+    ('/article/<article_id:.*>', ArticleView),
 ], debug=True)
 
