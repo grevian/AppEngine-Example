@@ -14,8 +14,16 @@ class MainPage(webapp2.RequestHandler):
   def get(self): 
     """Generate the main index page"""
     articles = Article.query().order(Article.rating).fetch(20)
+    article_list = []
+    for article in articles:
+      article_properties = { 'title': article.title,
+                             'rating': article.rating,
+                             # This model unpacking is necessary to get the key/id
+                             'id': article.key().id() }
+      article_list.append(article_properties)
+
     template_values = {
-      'articles': articles,
+      'articles': article_list,
     }
 
     template = jinja_environment.get_template('index.html')
