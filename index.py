@@ -35,7 +35,7 @@ class Article(webapp2.RequestHandler):
 
   def get(self):
     """Generate a page for a specific article"""
-    id = self.request.PARAMS['article_id']
+    id = self.request.GET['article_id']
     post = Posts.get_by_id(id)
     template_values = {
       'title': post.title,
