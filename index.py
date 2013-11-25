@@ -13,7 +13,7 @@ class MainPage(webapp2.RequestHandler):
 
   def get(self): 
     """Generate the main index page"""
-    articles = Article.query().order(Article.rating).fetch(20)
+    articles = Article.query().order(-Article.rating, Article.submitted).fetch(20)
     article_list = []
     for article in articles:
       article_properties = { 'title': article.title,
