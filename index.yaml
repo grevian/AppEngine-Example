@@ -1,0 +1,8 @@
+indexes:
+
+- kind: Article
+  properties:
+    - name: rating
+    - name: submitted
+      direction: desc
+
