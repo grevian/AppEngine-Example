@@ -8,11 +8,11 @@ class Article(ndb.Model):
   rating = ndb.FloatProperty(default=1.0)
 
 # Two models used to calculate the content rating
-class Upvote(db.Model):
+class Upvote(ndb.Model):
   article = ndb.KeyProperty(kind=Article)
   voted = ndb.DateTimeProperty(auto_now_add=True)
 
-class Downvote(db.Model):
+class Downvote(ndb.Model):
   article = ndb.KeyProperty(kind=Article)
   voted = ndb.DateTimeProperty(auto_now_add=True)
 
