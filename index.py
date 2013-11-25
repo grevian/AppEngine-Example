@@ -36,13 +36,13 @@ class ArticleView(webapp2.RequestHandler):
   def get(self):
     """Generate a page for a specific article"""
     id = self.request.GET['article_id']
-    post = Posts.get_by_id(id)
+    article = Article.get_by_id(id)
     template_values = {
-      'title': post.title,
-      'content': post.content,
-      'date': post.date,
-      'rating': post.rating,
-      'id': post.id,
+      'title': article.title,
+      'content': article.content,
+      'date': article.date,
+      'rating': article.rating,
+      'id': article.id,
     }
 
     template = jinja_environment.get_template('article.html')
