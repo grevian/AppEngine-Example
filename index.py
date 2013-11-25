@@ -19,7 +19,7 @@ class MainPage(webapp2.RequestHandler):
       article_properties = { 'title': article.title,
                              'rating': article.rating,
                              # This model unpacking is necessary to get the key/id
-                             'id': article.key().id() }
+                             'id': article.key.id() }
       article_list.append(article_properties)
 
     template_values = {
