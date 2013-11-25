@@ -9,6 +9,14 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /logo\.png
+  static_files: logo.png
+  upload: logo\.png
+
+- url: /theme\.css
+  static_files: theme.css
+  upload: theme\.css
+
 - url: /vote
   script: vote.Vote
 
