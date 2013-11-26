@@ -3,7 +3,10 @@ import logging
 import os
 import webapp2
 
+from google.appengine.ext import deferred
+
 from models import Article
+from update import update_ratings
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
@@ -56,10 +59,16 @@ class ArticleView(webapp2.RequestHandler):
     template = jinja_environment.get_template('article.html')
     self.response.out.write(template.render(template_values))
 
+class Update(webapp2.RequestHandler):
+  def get(self):
+    deferred.defer(update_ratings)
+    return self.redirect('/', body="Update Starting")
+
 # Here we can set up more advanced routing rules
 APP = webapp2.WSGIApplication([
     (r'/', MainPage),
     (r'/submit', Submit),
+    (r'/update', Update),
     (r'/article/(\d+)', ArticleView),
 ], debug=True)
 
