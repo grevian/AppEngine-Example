@@ -11,8 +11,9 @@ body h1 {
   display: inline-block;
 }
 
-a.vote {
+a.vote, a.vote:visited {
   text-decoration: none;
+  color: blue;
 }
 
 ul#main-content {
@@ -84,7 +85,6 @@ input[type="submit"] {
 
 #article-container .article-content {
   display: block;
-  background-color: #DDF;
   border-radius: 1em;
   border: 1px solid gray;
   padding: 1.5em;
