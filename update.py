@@ -1,7 +1,7 @@
 from datetime import datetime
 import logging
 
-from google.appengine.ext import deferred
+from google.appengine.ext import deferred, ndb
 
 from models import Upvote, Downvote, Article
 
