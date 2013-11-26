@@ -17,7 +17,7 @@ class Vote(webapp2.RequestHandler):
       vote = Downvote(article=article.key)
       article.rating = article.rating + 1.0
     
-    ndb.put_multi(article, vote)
+    ndb.put_multi([article, vote])
 
     return self.redirect('/', body="Thanks for your vote!")
 
