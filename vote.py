@@ -1,14 +1,9 @@
 import webapp2
-import jinja2
 import os
 
 from google.appengine.ext import ndb
 
-from models import Article
-
-# This just says to load templates from the same directory this file exists in
-jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+from models import Article, Upvote, Downvote
 
 class Vote(webapp2.RequestHandler):
 
@@ -17,10 +12,10 @@ class Vote(webapp2.RequestHandler):
     
     if vote_type == 'down':
       vote = Upvote(article=article)
-      article.rating = article.rating + 1.0
+      article.rating = article.rating - 1.0
     else:
       vote = Downvote(article=article)
-      article.rating = article.rating - 1.0
+      article.rating = article.rating + 1.0
     
     ndb.put_multi(article, vote)
 
