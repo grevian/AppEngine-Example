@@ -22,7 +22,7 @@ class Vote(webapp2.RequestHandler):
     return self.redirect('/', body="Thanks for your vote!")
 
   def get(self, article_id, vote_type):
-    return self.post(self, article_id, vote_type)
+    return self.post(article_id, vote_type)
 
 VOTE_APP = webapp2.WSGIApplication([
     (r'/vote/(\d+)/(\w+)', Vote),
