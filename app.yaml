@@ -18,7 +18,7 @@ handlers:
   upload: theme\.css
 
 - url: /vote/.*
-  script: vote.Vote
+  script: vote.VOTE_APP
 
 - url: /.*
   script: index.APP
