@@ -1,7 +1,7 @@
 <html>
  <head>
   <title>Welcome to Jeddit! The front page of this demo app!</title>
-  <link rel="stylesheet" type="text/css" href="theme.css" />
+  <link rel="stylesheet" type="text/css" href="/theme.css" />
  </head>
  <body>
  <h1>Jeddit!</h1>
@@ -10,8 +10,11 @@
  <h3><a href="/">Back to the Index</a></h3>
  <div id="article-container">
   <div class="article-title">{{ title }}</div>
-  <span class="article-rating">{{ rating }}</span>
   <span class="article-date">{{ date }}</span>
+  <span class="article-rating">{{ rating }}</span>
+  <span class="article-rating">{{ rating }}</span>
+  <a href="/vote/{{ id }}/up" class="upvote vote">&#x25B2;</a>
+  <a href="/vote/{{ id }}/down" class="downvote vote">&#x25BC;</a>
   <p class="article-content">{{ content }}</p>
  </div>
  </body>

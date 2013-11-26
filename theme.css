@@ -66,3 +66,27 @@ input[type="submit"] {
   padding: 0.5em;
 }
  
+#article-container {
+  margin-left: 1em;
+}
+
+#article-container .article-date, #article-container .article-rating {
+  color: lightgray;
+  font-weight: light;
+  font-size: small;
+}
+
+#article-container .article-title {
+  font-weight: bold;
+  font-size: x-large;
+  text-decoration: underline;
+}
+
+#article-container .article-content {
+  display: block;
+  background-color: #DDF;
+  border-radius: 1em;
+  border: 1px solid gray;
+  padding: 1.5em;
+  margin-left: 1em;
+}
