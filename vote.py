@@ -8,7 +8,7 @@ from models import Article, Upvote, Downvote
 class Vote(webapp2.RequestHandler):
 
   def post(self, article_id, vote_type): 
-    article = Article.get_by_id(article_id)
+    article = Article.get_by_id(int(article_id))
     
     if vote_type == 'down':
       vote = Upvote(article=article)
