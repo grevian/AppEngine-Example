@@ -20,9 +20,9 @@
  <ul id="main-content">
  {% for article in articles %}
   <li class="article-link">
+   <a href="/vote/{{ article.id }}/up" class="upvote vote">&#x25B2;</a>
+   <a href="/vote/{{ article.id }}/down" class="downvote vote">&#x25BC;</a>
    <span class="rating">{{ article.rating }}</span>
-   <a href="/vote/{{ article.id }}/up" class="upvote-link">&#x25B2;</a>
-   <a href="/vote/{{ article.id }}/down" class="downvote-link">&#x25BC;</a>
    <a href="/article/{{ article.id }}" class="article-link">{{ article.title }}</a>
   </li>
  {% endfor %}
