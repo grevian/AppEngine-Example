@@ -2,6 +2,8 @@ import webapp2
 import jinja2
 import os
 
+from google.appengine.ext import ndb
+
 from models import Article
 
 # This just says to load templates from the same directory this file exists in
@@ -10,20 +12,22 @@ jinja_environment = jinja2.Environment(
 
 class Vote(webapp2.RequestHandler):
 
-  def post(self): 
-    article_id = request.POST['article_id']
-    if not article_id:
-      self.abort(404)
-    
+  def post(self, article_id, vote_type): 
     article = Article.get_by_id(article_id)
     
-    if request.POST['type'] == 'down':
+    if vote_type == 'down':
       vote = Upvote(article=article)
+      article.rating = article.rating + 1.0
     else:
       vote = Downvote(article=article)
+      article.rating = article.rating - 1.0
+    
+    ndb.put_multi(article, vote)
 
-    vote.put()
+    return self.redirect('/', body="Thanks for your vote!")
 
-    template = jinja_environment.get_template('voted.html')
-    self.response.out.write(template.render({'article_id': article_id}))
+VOTE_APP = webapp2.WSGIApplication([
+    (r'/vote/(\d+)/down', Vote, defaults={'type': 'down'}),
+    (r'/vote/(\d+)/up', Vote, defaults={'type': 'up'}),
+], debug=True)
 

@@ -17,7 +17,7 @@ handlers:
   static_files: theme.css
   upload: theme\.css
 
-- url: /vote
+- url: /vote/.*
   script: vote.Vote
 
 - url: /.*
