@@ -7,22 +7,22 @@
  <h1>Jeddit!</h1>
  <img src="/logo.png" alt="Jeddit!" id="logo" />
  <br />
- <p id="add-article-container">
+ <div id="add-article-container">
+  <h3>Submit a new Article</h3>
   <form method="POST" action="/submit" id="add-article">
-   <label for="article-title">Title:</label>
+   <label for="article-title">Title</label>
    <input type="text" name="article-title" id="article-title" />
-   <label for="article-content">Content:</label>
+   <label for="article-content">Content</label>
    <textarea name="article-content" id="article-content"></textarea>
    <input type="submit" value="Post this Article" />
   </form>
- </p>
+ </div>
 
  <ul id="main-content">
  {% for article in articles %}
   <li class="article-link">
    <a href="/vote/{{ article.id }}/up" class="upvote vote">&#x25B2;</a>
    <a href="/vote/{{ article.id }}/down" class="downvote vote">&#x25BC;</a>
-   <span class="rating">{{ article.rating }}</span>
    <a href="/article/{{ article.id }}" class="article-link">{{ article.title }}</a>
   </li>
  {% endfor %}
