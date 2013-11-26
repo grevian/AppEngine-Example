@@ -11,7 +11,8 @@ def update_ratings(article_id=None):
   if not article_id:
     logging.info("Fanning out to update articles")
     # Get all articles except those who have a rating so low no one would see them
-    query = Article.query(keys_only=True).filter(Article.rating >= -10)
+    # Do a keys_only query because it's faster and because the keys are all we need here
+    query = Article.query(default_options=ndb.QueryOptions(keys_only=True)).filter(Article.rating >= -10)
     for article in query:
       deferred.defer(update_ratings, article_id=article.key.id())
     return
