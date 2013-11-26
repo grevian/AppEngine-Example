@@ -3,7 +3,7 @@ from google.appengine.ext import ndb
 # Our basic user submitted content
 class Article(ndb.Model):
   title = ndb.StringProperty(required=True)
-  content = ndb.StringProperty(required=True)
+  content = ndb.TextProperty(required=True)
   submitted = ndb.DateTimeProperty(auto_now_add=True)
   rating = ndb.FloatProperty(default=0.5)
 
