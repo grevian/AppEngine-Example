@@ -1,32 +1,92 @@
+body {
+  max-width: 70%;
+  min-width: 800px;
+  padding: 1em 5em 5em 0.5em;
+  margin: auto;
+}
+
+body h1 {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+a.vote, a.vote:visited {
+  text-decoration: none;
+  color: blue;
+}
+
+ul#main-content {
+  list-style: none;
+}
+
 #logo {
-  display: block;
-  margin-left: 3em
-  padding: 0.5em;
+  float: left;
+  display: inline-block;
+  border-right: 3px solid black;
+  padding-right: 1em;
+  margin: 0em 1em 1em 0em;
+}
+
+#add-article-container {
+  padding: 1em;
+  clear: both;
   border: 1px solid black;
 }
 
 label {
   font-size: small;
   clear: both;
-  float: left;
   display: block;
 }
 
 input[type="text"] {
-  float: left;
-  display: block;
   margin-left: 1em;
+  padding: 2px 15px;
+  border-radius: 0.5em;
+  border: 1px solid black;
+  display: inline-block;
+  width: 50%;
+  min-width: 200px;
 }
 
 textarea {
-  float: left;
-  display: block;
   margin-left: 1em;
+  padding: 2px 15px;
+  border-radius: 0.5em;
+  border: 1px solid black;
+  width: 80%;
+  min-width: 200px;
+  height: 100px;
+  margin-bottom: 1em;
 }
 
 input[type="submit"] {
   display: block;
-  clear: both;
+  margin-left: 1em;
   padding: 0.5em;
 }
  
+#article-container {
+  margin-left: 1em;
+}
+
+#article-container .article-date, #article-container .article-rating {
+  color: lightgray;
+  font-weight: light;
+  font-size: small;
+}
+
+#article-container .article-title {
+  font-weight: bold;
+  font-size: x-large;
+  text-decoration: underline;
+}
+
+#article-container .article-content {
+  display: block;
+  border-radius: 1em;
+  border: 1px solid gray;
+  padding: 1.5em;
+  margin-left: 1em;
+}
