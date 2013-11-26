@@ -30,7 +30,7 @@ class Vote(webapp2.RequestHandler):
     return self.post(self, article_id, vote_type)
 
 VOTE_APP = webapp2.WSGIApplication([
-    (r'/vote/(\d+)/down', Vote, defaults={'type': 'down'}),
-    (r'/vote/(\d+)/up', Vote, defaults={'type': 'up'}),
+    webapp2.Route(r'/vote/(\d+)/down', Vote, defaults={'type': 'down'}),
+    webapp2.Route(r'/vote/(\d+)/up', Vote, defaults={'type': 'up'}),
 ], debug=True)
 
