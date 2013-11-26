@@ -11,10 +11,10 @@ class Vote(webapp2.RequestHandler):
     article = Article.get_by_id(int(article_id))
     
     if vote_type == 'down':
-      vote = Upvote(article=article)
+      vote = Upvote(article=article.key)
       article.rating = article.rating - 1.0
     else:
-      vote = Downvote(article=article)
+      vote = Downvote(article=article.key)
       article.rating = article.rating + 1.0
     
     ndb.put_multi(article, vote)
