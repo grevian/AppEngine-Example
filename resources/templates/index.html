@@ -1,24 +1,7 @@
-<html>
- <head>
-  <title>Welcome to Jeddit! The front page of this demo app!</title>
-  <link rel="stylesheet" type="text/css" href="/resources/static/theme.css" />
- </head>
- <body>
- <h1>Jeddit!</h1>
- <img src="/logo.png" alt="Jeddit!" id="logo" />
- <br />
- <h3>The front page of this application!</h3>
- <div id="add-article-container">
-  <h3>Submit a new Article</h3>
-  <form method="POST" action="/submit" id="add-article">
-   <label for="article-title">Title</label>
-   <input type="text" name="article-title" id="article-title" />
-   <label for="article-content">Content</label>
-   <textarea name="article-content" id="article-content"></textarea>
-   <input type="submit" value="Post this Article" />
-  </form>
- </div>
-
+{% extends "base.html" %}
+{% block page_header %}The front page of this application!{% endblock %}
+{% block content %}
+ {% include "add_article.html" %}
  <ul id="main-content">
  {% for article in articles %}
   <li class="article-link">
@@ -28,6 +11,4 @@
   </li>
  {% endfor %}
  </ul>
- </body>
-</html>
-
+{% endblock %}
