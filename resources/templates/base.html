@@ -1,0 +1,16 @@
+<html>
+ <head>
+  <title>{% block title %}Welcome to Jeddit! The front page of this demo app!{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="/resources/static/theme.css" />
+ </head>
+ <body>
+ <h1>Jeddit!</h1>
+ <img src="/logo.png" alt="Jeddit!" id="logo" />
+ <br />
+ <h3>{% block page_header %}Empty Page{% endblock %}</h3>
+ {% block content %}
+   There is no content on this page! Whoops!
+ {% endblock %}
+ </body>
+</html>
+
