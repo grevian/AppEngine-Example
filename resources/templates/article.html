@@ -1,13 +1,9 @@
-<html>
- <head>
-  <title>Welcome to Jeddit! The front page of this demo app!</title>
-  <link rel="stylesheet" type="text/css" href="/theme.css" />
- </head>
- <body>
- <h1>Jeddit!</h1>
-  <a href="/"><img src="/logo.png" alt="Jeddit!" id="logo" /></a>
- <br />
- <h3><a href="/">Back to the Index</a></h3>
+{% extends "base.html" %}
+{% block page_header %}
+ {{title}} <br />
+ <a href="/">Back to the Index</a> 
+{% endblock %}
+{% block content %}
  <div id="article-container">
   <div class="article-title">{{ title }}</div>
   <span class="article-date">Posted: {{ date }}</span>
@@ -16,6 +12,4 @@
   <a href="/vote/{{ id }}/down" class="downvote vote">&#x25BC;</a>
   <p class="article-content">{{ content }}</p>
  </div>
- </body>
-</html>
-
+{% endblock %}

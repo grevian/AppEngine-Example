@@ -10,16 +10,15 @@ builtins:
 
 handlers:
 - url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+  static_files: resources/static/favicon.ico
+  upload: resources/static/favicon\.ico
 
 - url: /logo\.png
-  static_files: logo.png
-  upload: logo\.png
+  static_files: resources/static/logo.png
+  upload: resources/static/logo\.png
 
-- url: /theme\.css
-  static_files: theme.css
-  upload: theme\.css
+- url: /resources/static
+  static_dir: resources/static
 
 - url: /vote/.*
   script: vote.VOTE_APP
