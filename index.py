@@ -7,7 +7,7 @@ from models import Article
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+    loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
 class MainPage(webapp2.RequestHandler):
 
