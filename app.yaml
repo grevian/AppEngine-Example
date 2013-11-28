@@ -5,6 +5,7 @@ api_version: 1
 threadsafe: true
 
 builtins:
+- deferred: on
 - appstats: on
 
 handlers:
