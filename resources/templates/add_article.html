@@ -1,10 +1,23 @@
- <div id="add-article-container">
-  <h3>Submit a new Article</h3>
-  <form method="POST" action="/submit" id="add-article">
-   <label for="article-title">Title</label>
-   <input type="text" name="article-title" id="article-title" />
-   <label for="article-content">Content</label>
-   <textarea name="article-content" id="article-content"></textarea>
-   <input type="submit" value="Post this Article" />
-  </form>
+ <div id="add-article-container" class="panel panel-default panel-group">
+  <div class="panel-heading">
+   <a data-toggle="collapse" data-parent="#add-article-container" href="#add-article-panel" style="display: block; height: 100%;">
+    <h3 class="panel-title">
+     Submit a new Article
+     <span class="caret pull-right"></span>
+    </h3>
+   </a>
+  </div>
+  <div class="panel-collapse panel-body collapse" id="add-article-panel">
+   <form method="POST" action="/submit" id="add-article" role="form">
+    <div class="form-group">
+     <label for="article-title">Title</label>
+     <input type="text" class="form-control" placeholder="Article Title" name="article-title" id="article-title" />
+    </div>
+    <div class="form-group">
+     <label for="article-content">Content</label>
+     <textarea class="form-control" placeholder="Article Content" name="article-content" id="article-content"></textarea>
+    </div>
+    <input type="submit" value="Post this Article" class="btn btn-default" />
+   </form>
+  </div>
  </div>

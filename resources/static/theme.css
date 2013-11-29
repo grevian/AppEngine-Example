@@ -1,10 +1,3 @@
-body {
-  max-width: 70%;
-  min-width: 800px;
-  padding: 1em 5em 5em 0.5em;
-  margin: auto;
-}
-
 body h1 {
   margin: 0;
   padding: 0;
@@ -28,45 +21,6 @@ ul#main-content {
   margin: 0em 1em 1em 0em;
 }
 
-#add-article-container {
-  padding: 1em;
-  clear: both;
-  border: 1px solid black;
-}
-
-label {
-  font-size: small;
-  clear: both;
-  display: block;
-}
-
-input[type="text"] {
-  margin-left: 1em;
-  padding: 2px 15px;
-  border-radius: 0.5em;
-  border: 1px solid black;
-  display: inline-block;
-  width: 50%;
-  min-width: 200px;
-}
-
-textarea {
-  margin-left: 1em;
-  padding: 2px 15px;
-  border-radius: 0.5em;
-  border: 1px solid black;
-  width: 80%;
-  min-width: 200px;
-  height: 100px;
-  margin-bottom: 1em;
-}
-
-input[type="submit"] {
-  display: block;
-  margin-left: 1em;
-  padding: 0.5em;
-}
- 
 #article-container {
   margin-left: 1em;
 }

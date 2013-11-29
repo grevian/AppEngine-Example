@@ -1,16 +1,23 @@
+<!DOCTYPE html>
 <html>
  <head>
   <title>{% block title %}Welcome to Jeddit! The front page of this demo app!{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/resources/static/theme.css" />
+  <link href="/resources/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
  </head>
  <body>
- <h1>Jeddit!</h1>
- <img src="/logo.png" alt="Jeddit!" id="logo" />
- <br />
- <h3>{% block page_header %}Empty Page{% endblock %}</h3>
- {% block content %}
-   There is no content on this page! Whoops!
- {% endblock %}
+  <div class="container" id="main-content">
+   <h1>Jeddit!</h1>
+   <img src="/logo.png" alt="Jeddit!" id="logo" />
+   <br />
+   <h3>{% block page_header %}Empty Page{% endblock %}</h3>
+   {% block content %}
+    There is no content on this page! Whoops!
+   {% endblock %}
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/resources/static/bootstrap/js/bootstrap.min.js"></script>  
  </body>
 </html>
 
