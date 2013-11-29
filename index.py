@@ -28,7 +28,7 @@ class MainPage(webapp2.RequestHandler):
                                # This model unpacking is necessary to get the key/id
                                'id': article.key.id() }
         article_list.append(article_properties)
-      memcache.add("articles_list", articles_list)
+      memcache.add("articles_list", articles_list, time=60)
 
     # display the list of front page articles in the front page template
     template_values = {
