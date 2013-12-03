@@ -18,7 +18,7 @@ ul#main-content {
   display: inline-block;
   border-right: 3px solid black;
   padding-right: 1em;
-  margin: 0em 1em 1em 0em;
+  margin: 1em 1em 1em 0em;
 }
 
 #article-container {
