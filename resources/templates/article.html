@@ -5,11 +5,11 @@
 {% endblock %}
 {% block content %}
  <div id="article-container">
-  <div class="article-title">{{ title }}</div>
+  <div class="article-title">{{ title|e }}</div>
   <span class="article-date">Posted: {{ date }}</span>
   <span class="article-rating">Rating: {{ rating }}</span>
   <a href="/vote/{{ id }}/up" class="upvote vote">&#x25B2;</a>
   <a href="/vote/{{ id }}/down" class="downvote vote">&#x25BC;</a>
-  <p class="article-content">{{ content }}</p>
+  <p class="article-content">{{ content|e }}</p>
  </div>
 {% endblock %}
