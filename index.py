@@ -6,7 +6,7 @@ import webapp2
 from google.appengine.api import memcache
 from google.appengine.api import users
 
-from models import Article, JedditUser
+from models import Article, JedditUser, Comment
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
@@ -103,6 +103,19 @@ class Submit(webapp2.RequestHandler):
     # resubmitting the same form repeatedly
     return self.redirect('/article/%d' % article_key.id(), body="Thanks for your submission!")
 
+class AddComment(webapp2.RequestHandler):
+  def post(self, article_id):
+    article_id = int(article_id)
+    google_user = users.get_current_user()
+    user = JedditUser.get_or_create_by_user(google_user)
+    article = Article.get_by_id(article_id)
+    comment_content = self.request.POST['comment']
+    if not comment_content or comment_content.strip() == '':
+      return self.redirect('/article/%d' % article_id, body="Empty comment submitted")
+    comment = Comment(user=user.key, article=article.key, content=comment_content)
+    comment.put()
+    return self.redirect('/article/%d' % article_id, body="Thank you for your comment")
+
 class ArticleView(webapp2.RequestHandler):
 
   def get(self, article_id):
@@ -130,9 +143,22 @@ class ArticleView(webapp2.RequestHandler):
       if submitter:
         article_values['submitter'] = submitter.nickname
 
+
     # Merge the two sets of variables together
     template_values.update(article_values)
 
+    comment_list = []
+    # Add in any comments that might exist
+    for comment in Comment.query(Comment.article == article.key).order(Comment.posted):
+      comment_values = {}
+      comment_values['id'] = comment.key.id()
+      # Another fine example of an anti-pattern
+      comment_values['user'] = comment.user.get()
+      comment_values['posted'] = comment.posted.strftime("%A, %d. %B %Y %I:%M%p")
+      comment_values['content'] = comment.content
+      comment_list.append(comment_values)
+
+    template_values['comments'] = comment_list
     template = jinja_environment.get_template('article.html')
     self.response.out.write(template.render(template_values))
 
@@ -142,5 +168,6 @@ APP = webapp2.WSGIApplication([
     (r'/submit', Submit),
     (r'/login', Login),
     (r'/article/(\d+)', ArticleView),
+    (r'/article/(\d+)/comment', AddComment),
 ], debug=True)
 

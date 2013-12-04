@@ -54,4 +54,9 @@ class Downvote(ndb.Model):
   user = ndb.KeyProperty(kind=JedditUser)
   voted = ndb.DateTimeProperty(auto_now_add=True)
 
+class Comment(ndb.Model):
+  article = ndb.KeyProperty(kind=Article)
+  user = ndb.KeyProperty(kind=JedditUser)
+  posted = ndb.DateTimeProperty(auto_now_add=True)
+  content = ndb.TextProperty(required=True)
 
