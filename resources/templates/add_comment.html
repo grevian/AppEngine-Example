@@ -1,0 +1,11 @@
+ <div id="add-comment-container" class="panel panel-default panel-group">
+  <div class="panel panel-body">
+   <form method="POST" action="/article/{{ id }}/comment" id="add-comment" role="form">
+    <div class="form-group">
+     <label for="article-content">Comment</label>
+     <textarea class="form-control" placeholder="Your Insightful Comment" name="comment" id="comment"></textarea>
+    </div>
+    <input type="submit" value="Post this Comment" class="btn btn-default" />
+   </form>
+  </div>
+ </div>

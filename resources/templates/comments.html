@@ -1,0 +1,10 @@
+{% if comments %}
+ <div class="panel panel-default" id="comments" style="padding: 1em;">
+  {% for comment in comments %}
+   <div class="well" id="comment-{{ comment.id }}">
+    <span class="comment-info">{{ comment.user.nickname }} on {{ comment.posted }}</span>
+    <p class="comment-content">{{ comment.content|e }}</p>
+   </div>
+  {% endfor %}
+ </div>
+{% endif %}
