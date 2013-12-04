@@ -16,12 +16,18 @@
    </a>
    <br />
    <h3>{% block page_header %}Empty Page{% endblock %}</h3>
+   {% if not user %}
+    <a href="{{ google_login_url }}">Login</a>
+   {% else %}
+    <a href="{{ google_logout_url }}">Logout</a>
+   {% endif %}
    {% block content %}
     There is no content on this page! Whoops!
    {% endblock %}
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="/resources/static/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/resources/static/google_oauth.js"></script>
  </body>
 </html>
 

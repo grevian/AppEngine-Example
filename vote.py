@@ -2,13 +2,15 @@ import webapp2
 import os
 
 from google.appengine.ext import ndb
+from google.appengine.api import users
 
-from models import Article, Upvote, Downvote
+from models import Article, Upvote, Downvote, JedditUser
 
 class Vote(webapp2.RequestHandler):
 
   def post(self, article_id, vote_type): 
     article = Article.get_by_id(int(article_id))
+    user = users.get_current_user()
     
     if vote_type == 'down':
       vote = Upvote(article=article.key)
@@ -17,6 +19,9 @@ class Vote(webapp2.RequestHandler):
       vote = Downvote(article=article.key)
       article.rating = article.rating + 1.0
     
+    if user:
+      vote.user = JedditUser.key_from_user(user)
+
     ndb.put_multi([article, vote])
 
     return self.redirect('/', body="Thanks for your vote!")
