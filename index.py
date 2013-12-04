@@ -81,8 +81,8 @@ class Login(webapp2.RequestHandler):
         existing_user.user = user
         new_user.put()
 
-      if self.request.GET['final']:
-        return self.redirect(self.request.GET['final'], body="Thanks for logging in")
+      if self.request.get('final'):
+        return self.redirect(self.request.get('final'), body="Thanks for logging in")
         
       return self.redirect('/', body="Thanks for logging in")
     else:
