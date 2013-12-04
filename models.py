@@ -20,9 +20,13 @@ class JedditUser(ndb.Model):
     return cls(key=key, user=user)
 
   @classmethod
-  def get_by_user(cls, user):
+  def get_or_create_by_user(cls, user):
     key = cls.key_from_user(user)
-    return key.get()    
+    existing_user = key.get()
+    if not user:
+      existing_user = cls.create(user)
+      existing_user.put()
+    return existing_user    
 
   @property
   def nickname(self):

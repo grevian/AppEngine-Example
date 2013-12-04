@@ -20,7 +20,7 @@ class MainPage(webapp2.RequestHandler):
 
     user = users.get_current_user()
     if user:
-      template_values['user'] = user
+      template_values['user'] = JedditUser.get_or_create_by_user(user)
       template_values['google_logout_url'] = users.create_logout_url('/')
     else:
       template_values['google_login_url'] = users.create_login_url('/login')
@@ -44,7 +44,9 @@ class MainPage(webapp2.RequestHandler):
         # Though it does show exactly why you'd want to memcache a heavier object like this
         if article.submitter:
           submitter = article.submitter.get()
-          article_properties['submitter'] = submitter.nickname
+          # We test this in case a user was deleted
+          if submitter:
+            article_properties['submitter'] = submitter.nickname
 
         article_list.append(article_properties)
       memcache.add("articles_list", articles_list, time=60)
@@ -71,13 +73,11 @@ class Login(webapp2.RequestHandler):
     if user:
       # Use a user entity in our datastore so we can get their nickname etc. for other users to see
       # Also to tie content created by them on Jeddit back to their user account
-      existing_user = JedditUser.get_by_user(user)
-      if not existing_user:
-        new_user = JedditUser.create(user)
-        new_user.put()
-      # The docs indicate that a user could change their email address or nickname, which could require
+      existing_user = JedditUser.get_or_create_by_user(user)
+      
+      # The docs indicate that an existing user could change their email address or nickname, which could require
       # the user entity to be updated, so handle that case here
-      elif existing_user.user != user:
+      if existing_user.user != user:
         existing_user.user = user
         new_user.put()
       return self.redirect('/', body="Thanks for logging in")
@@ -127,7 +127,8 @@ class ArticleView(webapp2.RequestHandler):
 
     if article.submitter:
       submitter = article.submitter.get()
-      article_values['submitter'] = submitter.nickname
+      if submitter:
+        article_values['submitter'] = submitter.nickname
 
     # Merge the two sets of variables together
     template_values.update(article_values)
