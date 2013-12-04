@@ -40,10 +40,6 @@ class MainPage(webapp2.RequestHandler):
 
 class Submit(webapp2.RequestHandler):
 
-  def get(self):
-    template = jinja_environment.get_template('submit.html')
-    self.response.out.write(template.render(template_values))
-
   def post(self):
     article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
     article_key = article.put()
