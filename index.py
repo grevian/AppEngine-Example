@@ -80,6 +80,10 @@ class Login(webapp2.RequestHandler):
       if existing_user.user != user:
         existing_user.user = user
         new_user.put()
+
+      if self.request.GET['final']:
+        return self.redirect(self.request.GET['final'], body="Thanks for logging in")
+        
       return self.redirect('/', body="Thanks for logging in")
     else:
       # You could display a login form here if you had alternative methods of logging in
@@ -127,7 +131,7 @@ class ArticleView(webapp2.RequestHandler):
       template_values['user'] = user
       template_values['google_logout_url'] = users.create_logout_url('/')
     else:
-      template_values['google_login_url'] = users.create_login_url('/login')
+      template_values['google_login_url'] = users.create_login_url('/login?final=/article/%d' % int(article_id))
 
     article = Article.get_by_id(int(article_id))
     article_values = {
