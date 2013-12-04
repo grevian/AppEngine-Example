@@ -4,13 +4,36 @@ body h1 {
   display: inline-block;
 }
 
-a.vote, a.vote:visited {
-  text-decoration: none;
-  color: blue;
+thead {
+ font-size: 2em;
+ text-align: center;
 }
 
-ul#main-content {
-  list-style: none;
+td.votes {
+ width: 4em;
+}
+
+td a.article-link {
+  font-size: 1.5em;
+  text-align: left;
+}
+
+a.vote:hover, a.vote:visited:hover {
+  text-decoration: none;
+  color: blue;
+
+}
+
+a.vote, a.vote:visited {
+  text-decoration: none;
+  color: black;
+}
+
+a.vote {
+ display: block;
+ float: left;
+ clear: both;
+ font-size: 2em;
 }
 
 #logo {
@@ -21,14 +44,14 @@ ul#main-content {
   margin: 1em 1em 1em 0em;
 }
 
-#article-container {
-  margin-left: 1em;
-}
-
 #article-container .article-date, #article-container .article-rating {
   color: lightgray;
   font-weight: light;
   font-size: small;
+}
+
+#article-container {
+  padding: 1em;
 }
 
 #article-container .article-title {
@@ -38,9 +61,6 @@ ul#main-content {
 }
 
 #article-container .article-content {
-  display: block;
-  border-radius: 1em;
-  border: 1px solid gray;
   padding: 1.5em;
   margin-left: 1em;
 }

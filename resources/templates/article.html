@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block page_header %}
- {{title}} <br />
- <a href="/">Back to the Index</a> 
+ {{title|e}}
 {% endblock %}
 {% block content %}
- <div id="article-container">
-  <div class="article-title">{{ title|e }}</div>
+ <div id="article-container" class="panel panel-default">
   <span class="article-date">Posted: {{ date }}</span>
   <span class="article-rating">Rating: {{ rating }}</span>
-  <a href="/vote/{{ id }}/up" class="upvote vote">&#x25B2;</a>
-  <a href="/vote/{{ id }}/down" class="downvote vote">&#x25BC;</a>
+  <a href="/vote/{{ id }}/up" class="upvote vote glyphicon glyphicon-thumbs-up">&nbsp;</a>
+  <a href="/vote/{{ id }}/down" class="downvote vote glyphicon glyphicon-thumbs-down">&nbsp;</a>
   <p class="article-content">{{ content|e }}</p>
  </div>
 {% endblock %}

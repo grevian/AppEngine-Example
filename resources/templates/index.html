@@ -3,14 +3,24 @@
 {% block content %}
  {% include "add_article.html" %}
  <div class="panel panel-default">
-  <ul id="main-content">
-  {% for article in articles %}
-   <li class="article-link">
-    <a href="/vote/{{ article.id }}/up" class="glyphicon glyphicon-chevron-up vote"></a>
-    <a href="/vote/{{ article.id }}/down" class="glyphicon glyphicon-chevron-down vote"></a>
-    <a href="/article/{{ article.id }}" class="article-link">{{ article.title|e }}</a>
-   </li>
-  {% endfor %}
-  </ul>
+  <table class="table table-striped table-hover">
+   <thead>
+    <tr>
+     <td colspan="2">Articles</td>
+    </tr>
+   </thead>
+   <tbody>
+   {% for article in articles %}
+   <tr>
+    <td class="votes">
+     <a href="/vote/{{ article.id }}/up" class="glyphicon glyphicon-thumbs-up vote">&nbsp;</a>
+     <a href="/vote/{{ article.id }}/down" class="glyphicon glyphicon-thumbs-down vote">&nbsp;</a>
+    </td>
+    <td>
+     <a href="/article/{{ article.id }}" class="article-link">{{ article.title|e }}</a>
+    </td>
+   {% endfor %}
+   </tbody>
+  </table>
  </div
 {% endblock %}
