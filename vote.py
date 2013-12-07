@@ -7,7 +7,7 @@ from google.appengine.api import users
 from models.content import Article, Upvote, Downvote
 from models.auth import JedditUser
 
-class VoteHandler(webapp2.RequestHandler):
+class AddVoteHandler(webapp2.RequestHandler):
 
   def post(self, article_id, vote_type): 
     article = Article.get_by_id(int(article_id))

@@ -13,7 +13,7 @@ from models.auth import JedditUser
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
-class SubmitArticleHandler(webapp2.RequestHandler):
+class AddArticleHandler(webapp2.RequestHandler):
 
   def post(self):
     article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
