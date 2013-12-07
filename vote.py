@@ -7,7 +7,7 @@ from google.appengine.api import users
 from models.content import Article, Upvote, Downvote
 from models.auth import JedditUser
 
-class Vote(webapp2.RequestHandler):
+class VoteHandler(webapp2.RequestHandler):
 
   def post(self, article_id, vote_type): 
     article = Article.get_by_id(int(article_id))
@@ -29,8 +29,4 @@ class Vote(webapp2.RequestHandler):
 
   def get(self, article_id, vote_type):
     return self.post(article_id, vote_type)
-
-VOTE_APP = webapp2.WSGIApplication([
-    (r'/vote/(\d+)/(\w+)', Vote),
-], debug=True)
 

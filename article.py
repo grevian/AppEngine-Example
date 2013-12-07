@@ -13,7 +13,7 @@ from models.auth import JedditUser
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
-class Submit(webapp2.RequestHandler):
+class SubmitArticleHandler(webapp2.RequestHandler):
 
   def post(self):
     article = Article(title=self.request.POST['article-title'], content=self.request.POST['article-content'])
@@ -31,7 +31,7 @@ class Submit(webapp2.RequestHandler):
     # resubmitting the same form repeatedly
     return self.redirect('/article/%d' % article_key.id(), body="Thanks for your submission!")
 
-class AddComment(webapp2.RequestHandler):
+class AddCommentHandler(webapp2.RequestHandler):
   def post(self, article_id):
     article_id = int(article_id)
     google_user = users.get_current_user()
@@ -44,7 +44,7 @@ class AddComment(webapp2.RequestHandler):
     comment.put()
     return self.redirect('/article/%d' % article_id, body="Thank you for your comment")
 
-class ArticleView(webapp2.RequestHandler):
+class ViewArticleHandler(webapp2.RequestHandler):
 
   def get(self, article_id):
     """Generate a page for a specific article"""
@@ -89,11 +89,4 @@ class ArticleView(webapp2.RequestHandler):
     template_values['comments'] = comment_list
     template = jinja_environment.get_template('article.html')
     self.response.out.write(template.render(template_values))
-
-# Here we can set up more advanced routing rules
-APP = webapp2.WSGIApplication([
-    (r'/submit', Submit),
-    (r'/article/(\d+)', ArticleView),
-    (r'/article/(\d+)/comment', AddComment),
-], debug=True)
 

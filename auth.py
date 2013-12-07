@@ -13,7 +13,7 @@ from models.auth import JedditUser
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
-class Login(webapp2.RequestHandler):
+class LoginHandler(webapp2.RequestHandler):
 
   def post(self):
       # Here you could attempt to create an account through other APIs that could have been passed in
@@ -43,9 +43,4 @@ class Login(webapp2.RequestHandler):
     else:
       # You could display a login form here if you had alternative methods of logging in
       self.response.write('You could not be logged in')
-
-# Here we can set up more advanced routing rules
-APP = webapp2.WSGIApplication([
-    (r'/login', Login),
-], debug=True)
 

@@ -13,7 +13,7 @@ from models.auth import JedditUser
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname('resources/templates/')))
 
-class MainPage(webapp2.RequestHandler):
+class IndexHandler(webapp2.RequestHandler):
 
   def get(self): 
     """Generate the main index page"""
@@ -58,9 +58,4 @@ class MainPage(webapp2.RequestHandler):
     # If users aren't logged in, I could cache and return the entire rendered front page
     template = jinja_environment.get_template('index.html')
     self.response.out.write(template.render(template_values))
-
-# Here we can set up more advanced routing rules
-APP = webapp2.WSGIApplication([
-    (r'/', MainPage),
-], debug=True)
 
