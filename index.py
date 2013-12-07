@@ -31,6 +31,7 @@ class IndexHandler(webapp2.RequestHandler):
 
     # If it wasn't in memcache, generate the list and place it into memcache
     if not articles_list:
+      logging.info("Front page not found in memcache, requerying")
       articles = Article.query().order(-Article.rating, -Article.submitted).fetch(20)
       article_list = []
       for article in articles:
