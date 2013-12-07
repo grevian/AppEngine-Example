@@ -44,3 +44,14 @@ class LoginHandler(webapp2.RequestHandler):
       # You could display a login form here if you had alternative methods of logging in
       self.response.write('You could not be logged in')
 
+def user_vars():
+    template_values = {}
+
+    user = users.get_current_user()
+
+    if user:
+      template_values['user'] = JedditUser.get_or_create_by_user(user)
+    else:
+      template_values['google_login_url'] = users.create_login_url('/login')
+
+    return template_values
