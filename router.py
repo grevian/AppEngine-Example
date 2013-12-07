@@ -9,6 +9,7 @@ from google.appengine.api import users
 from index import MainPage
 from auth import Login
 from article import Submit, ArticleView, AddComment
+from vote import Vote
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
@@ -21,5 +22,6 @@ APP = webapp2.WSGIApplication([
     (r'/submit', Submit),
     (r'/article/(\d+)', ArticleView),
     (r'/article/(\d+)/comment', AddComment),
+    (r'/vote/(\d+)/(\w+)', Vote),
 ], debug=True)
 
