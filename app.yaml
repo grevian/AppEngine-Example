@@ -23,7 +23,7 @@ handlers:
   script: vote.VOTE_APP
 
 - url: /.*
-  script: index.APP
+  script: router.APP
 
 libraries:
 - name: webapp2
