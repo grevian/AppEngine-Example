@@ -4,7 +4,8 @@ import os
 from google.appengine.ext import ndb
 from google.appengine.api import users
 
-from models import Article, Upvote, Downvote, JedditUser
+from models.content import Article, Upvote, Downvote
+from models.auth import JedditUser
 
 class Vote(webapp2.RequestHandler):
 

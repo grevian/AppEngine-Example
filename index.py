@@ -6,7 +6,8 @@ import webapp2
 from google.appengine.api import memcache
 from google.appengine.api import users
 
-from models import Article, JedditUser, Comment
+from models.content import Article, Comment
+from models.auth import JedditUser
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
