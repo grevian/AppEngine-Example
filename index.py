@@ -18,6 +18,8 @@ class IndexHandler(webapp2.RequestHandler):
   def get(self): 
     """Generate the main index page"""
     template_values = {}
+
+    # Load any user specific values to pass into the template
     template_values.update(user_vars())
 
     # Check memcache for the list of front page articles
@@ -26,14 +28,14 @@ class IndexHandler(webapp2.RequestHandler):
     # If it wasn't in memcache, generate the list and place it into memcache
     if not articles_list:
       logging.info("Front page not found in memcache, requerying")
-      articles = Article.query().order(-Article.rating, -Article.submitted).fetch(20)
       article_list = []
+      articles = Article.query().order(-Article.rating, -Article.submitted).fetch(20)
+
       for article in articles:
         article_properties = { 'title': article.title,
                                'rating': article.rating,
-                               # This model unpacking is necessary to get the key/id
+                               'submitted': article.submitted,
                                'id': article.key.id(),
-                               'submitted': article.submitted
                                }
 
         # This is actually an anti-pattern, I should show the appstats waterfall here and have a PR to fix it
