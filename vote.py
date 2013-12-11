@@ -17,6 +17,7 @@ class AddVoteHandler(webapp2.RequestHandler):
     if user:
       user_key = JedditUser.key_from_user(user)
     
+    # TODO Votes are now being created properly, Add update requests to a pull queue
     if vote_type == 'down':
       vote = Vote.create(article_key=article.key, user_key=user_key, value=DOWNVOTE)
       article.rating = article.rating - 1.0
