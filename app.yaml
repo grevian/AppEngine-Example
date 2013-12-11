@@ -19,11 +19,8 @@ handlers:
 - url: /resources/static
   static_dir: resources/static
 
-- url: /vote/.*
-  script: vote.VOTE_APP
-
 - url: /.*
-  script: index.APP
+  script: router.APP
 
 libraries:
 - name: webapp2
