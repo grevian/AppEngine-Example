@@ -10,4 +10,10 @@
   <a href="/vote/{{ id }}/down" class="downvote vote glyphicon glyphicon-thumbs-down">&nbsp;</a>
   <p class="article-content">{{ content|e }}</p>
  </div>
+ {% if user %}
+  {% include "add_comment.html" %}
+ {% endif %}
+ {% if comments %}
+  {% include "comments.html" %}
+ {% endif %}
 {% endblock %}
