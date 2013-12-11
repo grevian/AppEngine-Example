@@ -4,10 +4,15 @@ import os
 import webapp2
 
 from google.appengine.api import memcache
+from google.appengine.api import taskqueue
 from google.appengine.api import users
+from google.appengine.ext import deferred
+from google.appengine.ext import ndb
 
+from models.vote import RatingsUpdateJob
 from models.content import Article, Comment
 from models.auth import JedditUser
+from vote import RATINGS_QUEUE, update_all_ratings
 
 # This just says to load templates from the same directory this file exists in
 jinja_environment = jinja2.Environment(
@@ -89,4 +94,59 @@ class ViewArticleHandler(webapp2.RequestHandler):
     template_values['comments'] = comment_list
     template = jinja_environment.get_template('article.html')
     self.response.out.write(template.render(template_values))
+
+
+def get_frontpage_articles():
+  # Check memcache for the list of front page articles
+  articles_list = memcache.get("articles_list")
+
+  # If it wasn't in memcache, generate the list and place it into memcache
+  if not articles_list:
+    # Check if article stats need an update, or is currently updating
+    stats_future = taskqueue.QueueStatistics.fetch_async(RATINGS_QUEUE)
+
+    # Query for the top 20 current articles
+    articles_future = Article.query().order(-Article.rating, -Article.submitted).fetch_async(20)
+
+    # We get the queue stats to see if any ratings updates are waiting to be applied
+    stats = stats_future.get_result()
+    # The marker existing means an update job is already in progress
+    
+    @ndb.transactional
+    def update_ratings():
+      marker_exists = RatingsUpdateJob.get_by_id(RatingsUpdateJob.MARKER_ID)
+      if stats.tasks > 0 and not marker_exists:
+        logging.info("Ratings updates are waiting to be applied, Queuing update task")
+        RatingsUpdateJob(id=RatingsUpdateJob.MARKER_ID).put()
+        deferred.defer(update_all_ratings)
+    update_ratings()
+
+    articles_list = build_article_list(articles_future.get_result())
+
+    # Add the article list to memcache
+    memcache.add("articles_list", articles_list, time=60)
+
+  return articles_list
+
+def build_article_list(articles):
+  articles_list = []
+  # Unpack the article entities
+  for article in articles:
+    article_properties = { 'title': article.title,
+                           'rating': article.rating,
+                           'id': article.key.id(),
+                           'submitted': article.submitted
+                         }
+
+    # This is actually an anti-pattern, I should show the appstats waterfall here and have a PR to fix it
+    # Though it does show exactly why you'd want to memcache a heavier object like this
+    if article.submitter:
+      submitter = article.submitter.get()
+      # We test this in case a user was deleted
+      if submitter:
+        article_properties['submitter'] = submitter.nickname
+      
+    articles_list.append(article_properties)
+
+  return articles_list
 
