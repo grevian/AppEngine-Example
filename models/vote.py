@@ -20,3 +20,9 @@ class Vote(ndb.Model):
     key = ndb.Key('Vote', '%s:%s' % (article_key.id(), user_key.id()))
     return Vote(key=key, user=user_key, article=article_key, value=value)
 
+class RatingsUpdateJob(ndb.Model):
+  MARKER_ID = 'RATINGS_UPDATE_JOB'
+  job_started = ndb.DateTimeProperty(auto_now_add=True, indexed=False)
+  job_updated = ndb.DateTimeProperty(auto_now=True, indexed=False)
+  articles_updating = ndb.KeyProperty(kind=Article,repeated=True, indexed=False)
+

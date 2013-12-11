@@ -6,6 +6,7 @@ threadsafe: true
 
 builtins:
 - appstats: on
+- deferred: on
 
 handlers:
 - url: /favicon\.ico
